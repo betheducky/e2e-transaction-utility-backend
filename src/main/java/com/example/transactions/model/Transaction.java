@@ -4,13 +4,15 @@ public class Transaction {
     String id;
     String description;
     double amount;
+    String type;
     String createdAt;
     String updatedAt;
 
-    public Transaction(String id, String description, double amount, String createdAt, String updatedAt) {
+    public Transaction(String id, String description, double amount, String type, String createdAt, String updatedAt) {
         this.id = id;
         this.description = description;
         this.amount = amount;
+        this.type = type;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -37,6 +39,14 @@ public class Transaction {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCreatedAt() {
