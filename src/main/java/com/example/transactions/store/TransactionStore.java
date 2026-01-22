@@ -12,11 +12,12 @@ public class TransactionStore {
         this.transactions = new ArrayList<Transaction>();
     }
 
-    public void add(Transaction transaction) {
+    public boolean add(Transaction transaction) {
         if(transaction == null){
             throw new IllegalArgumentException("Transaction cannot be null!");
         } else {
             this.transactions.add(transaction);
+            return true;
         }
     }
 
@@ -36,7 +37,7 @@ public class TransactionStore {
     public boolean delete(String id) {
         Transaction selectedItem = this.findById(id);
         if(selectedItem == null){
-            return false;
+            throw new IllegalArgumentException("Selected item cannot be null!");
         } else {
             transactions.remove(selectedItem);
             return true;
