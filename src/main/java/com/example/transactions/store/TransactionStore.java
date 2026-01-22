@@ -13,12 +13,15 @@ public class TransactionStore {
     }
 
     public void add(Transaction transaction) {
-        this.transactions.add(transaction);
-    }
-    public void findAll() {
-        for (Transaction transaction : transactions) {
-            System.out.println(transaction);
+        if(transaction == null){
+            throw new IllegalArgumentException("Transaction cannot be null!");
+        } else {
+            this.transactions.add(transaction);
         }
+    }
+
+    public List<Transaction> findAll() {
+        return new ArrayList<>(transactions);
     }
 
     public Transaction findById(String id) {
@@ -30,9 +33,15 @@ public class TransactionStore {
         return null;
     }
 
-    public void delete(String id) {
+    public boolean delete(String id) {
         Transaction selectedItem = this.findById(id);
-        transactions.remove(selectedItem);
+        if(selectedItem == null){
+            return false;
+        } else {
+            transactions.remove(selectedItem);
+            return true;
+        }
+        
     }
     
 }
