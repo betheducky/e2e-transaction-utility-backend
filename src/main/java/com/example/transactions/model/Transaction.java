@@ -1,14 +1,16 @@
 package main.java.com.example.transactions.model;
+import main.java.com.example.transactions.enums.Type;
+import java.time.Instant;
 
 public class Transaction {
     String id;
     String description;
     double amount;
-    String type;
-    String createdAt;
-    String updatedAt;
+    Type type;
+    Instant createdAt;
+    Instant updatedAt;
 
-    public Transaction(String id, String description, double amount, String type, String createdAt, String updatedAt) {
+    public Transaction(String id, String description, double amount, Type type, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.description = description;
         this.amount = amount;
@@ -41,27 +43,27 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public String getType() {
+    public Type getType() {
         return this.type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public String getCreatedAt() {
+    public Instant getCreatedAt() {
         return this.createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public Instant getUpdatedAt() {
         return this.updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
