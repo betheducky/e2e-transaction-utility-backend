@@ -48,7 +48,7 @@ public class TransactionController {
             }
 
         } catch (IllegalArgumentException e) {
-            sendResponse(e, 400, e.getMessage());
+            sendResponse(exchange, 400, e.getMessage());
         } catch (Exception e) {
             sendResponse(exchange, 500, "Internal Server Error");
         }
@@ -56,7 +56,7 @@ public class TransactionController {
 
     private void handleCreate(HttpExchange exchange) throws IOException {
         String body = new String(exchange.getRequestBody().readAllBytes());
-        Map<String, Object> data = JsonUtil.parse(body);
+        Map<String, String> data = JsonUtil.parse(body);
 
         String description = (String) data.get("description");
         double amount = ((Number) data.get("amount")).doubleValue();
@@ -77,11 +77,11 @@ public class TransactionController {
         String id = path.substring(path.lastIndexOf("/") + 1);
 
         String body = new String(exchange.getRequestBody().readAllBytes());
-        Map<String, Object> data = JsonUtil.parse(body);
+        Map<String, String> data = JsonUtil.parse(body);
 
         String desc = (String) data.get("description");
         double amount = data.get("amount") != null
-            ? ((Number) data.get("amount")).doubleValue()
+            ? ((String) data.get("amount"))
             : null;
         
         Type type = data.get("type") != null

@@ -42,6 +42,29 @@ public final class JsonUtil {
             return result;
     }
 
+    public static String stringify(Transaction t) {
+        return new StringBuilder()
+        .append("{")
+        .append("\"id\":\"").append(t.getId()).append("\",")
+        .append("\"description\":\"").append(t.getDescription()).append("\",")
+        .append("\"amount\":").append(t.getAmount()).append(",")
+        .append("\"type\":\"").append(t.getType()).append("\",")
+        .append("\"createdAt\":\"").append(t.getCreatedAt()).append("\",")
+        .append("\"updatedAt\":\"").append(t.getUpdatedAt()).append("\"")
+        .append("}")
+        .toString();
+    }
+
+    public static String stringify(List<Transaction> transactions) {
+        StringJoiner joiner = new StringJoiner(",", "[", "]");
+
+        for(Transaction t : transactions) {
+            joiner.add(stringify(t));
+        }
+
+        return joiner.toString();
+    }
+
     private static String stripQuotes(String s){
         if(s.startsWith("\"") && s.endsWith("\"")) {
             return s.substring(1, s.length() - 1);
