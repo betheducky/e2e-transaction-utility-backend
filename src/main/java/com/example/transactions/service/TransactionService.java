@@ -5,6 +5,8 @@ import main.java.com.example.transactions.enums.Type;
 import main.java.com.example.transactions.model.Transaction;
 import java.util.UUID;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionService {
 
@@ -37,6 +39,10 @@ public class TransactionService {
 
     }
 
+    public List<Transaction> get() {
+        return store.findAll();
+    }
+
     public Transaction update(String id, String updatedDescription, double updatedAmount, Type updatedType) {
 
         Transaction existing = store.findById(id);
@@ -52,8 +58,6 @@ public class TransactionService {
         if (updatedAmount < 0) {
             throw new IllegalArgumentException("Amount must be non-negative!");
         }
-        
-        existing.setAmount(updatedAmount);
 
         Type effectiveType = updatedType != null
             ? updatedType
