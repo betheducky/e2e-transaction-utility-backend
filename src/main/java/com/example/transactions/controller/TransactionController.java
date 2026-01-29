@@ -59,7 +59,7 @@ public class TransactionController {
         Map<String, String> data = JsonUtil.parse(body);
 
         String description = (String) data.get("description");
-        double amount = ((Number) data.get("amount")).doubleValue();
+        double amount = Double.parseDouble(data.get("amount"));
         Type type = Type.valueOf((String) data.get("type"));
 
         Transaction created = service.create(description, amount, type);
@@ -81,7 +81,7 @@ public class TransactionController {
 
         String desc = (String) data.get("description");
         double amount = data.get("amount") != null
-            ? ((String) data.get("amount"))
+            ? Double.parseDouble(data.get("amount"))
             : null;
         
         Type type = data.get("type") != null
