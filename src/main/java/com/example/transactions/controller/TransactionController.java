@@ -21,7 +21,6 @@ public class TransactionController {
 
     private void sendResponse(HttpExchange exchange, int statusCode, String responseBody) throws IOException {
         byte[] responseBytes = responseBody.getBytes(StandardCharsets.UTF_8);
-// READ ABOUT HOW THIS HELPER WORKS THEN CREATE JSON UTILITY FILES;
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(statusCode, responseBytes.length);
 
