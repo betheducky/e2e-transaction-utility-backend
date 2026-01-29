@@ -5,7 +5,6 @@ import main.java.com.example.transactions.enums.Type;
 import main.java.com.example.transactions.model.Transaction;
 import java.util.UUID;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionService {
