@@ -1,8 +1,8 @@
-package main.java.com.example.transactions.store;
+package example.transactions.store;
 
 import java.util.List;
 import java.util.ArrayList;
-import main.java.com.example.transactions.model.Transaction;
+import example.transactions.model.Transaction;
 
 public final class TransactionStore {
 

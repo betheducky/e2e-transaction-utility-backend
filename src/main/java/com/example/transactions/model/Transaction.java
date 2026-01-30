@@ -1,5 +1,5 @@
-package main.java.com.example.transactions.model;
-import main.java.com.example.transactions.enums.Type;
+package example.transactions.model;
+import example.transactions.enums.Type;
 import java.time.Instant;
 
 public class Transaction {

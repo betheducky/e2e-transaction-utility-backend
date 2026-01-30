@@ -1,17 +1,18 @@
-package main.java.com.example.transactions.controller;
+package example.transactions.controller;
 
-import main.java.com.example.transactions.service.TransactionService;
+import example.transactions.service.TransactionService;
 import com.sun.net.httpserver.HttpExchange;
-import main.java.com.example.transactions.util.JsonUtil;
+import com.sun.net.httpserver.HttpHandler;
+import example.transactions.util.JsonUtil;
 import java.util.Map;
-import main.java.com.example.transactions.enums.Type;
-import main.java.com.example.transactions.model.Transaction;
+import example.transactions.enums.Type;
+import example.transactions.model.Transaction;
 import java.util.List;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.io.OutputStream;
 
-public class TransactionController {
+public class TransactionController implements HttpHandler {
     
     private final TransactionService service;
 

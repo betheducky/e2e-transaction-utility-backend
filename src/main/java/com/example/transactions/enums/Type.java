@@ -1,4 +1,4 @@
-package main.java.com.example.transactions.enums;
+package example.transactions.enums;
 
 public enum Type {
     INCOME {

@@ -1,6 +1,6 @@
-package main.java.com.example.transactions.util;
+package example.transactions.util;
 
-import main.java.com.example.transactions.model.Transaction;
+import example.transactions.model.Transaction;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public final class JsonUtil {
             Map <String, String> result = new HashMap<>();
 
             json = json.trim();
-            if(json.startsWith("{") || json.endsWith("}")) {
+            if(!json.startsWith("{") || !json.endsWith("}")) {
                 throw new IllegalArgumentException("Invalid JSON object");
             }
 
