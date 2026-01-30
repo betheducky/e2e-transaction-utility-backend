@@ -1,8 +1,8 @@
-package main.java.com.example.transactions.service;
+package example.transactions.service;
 
-import main.java.com.example.transactions.store.TransactionStore;
-import main.java.com.example.transactions.enums.Type;
-import main.java.com.example.transactions.model.Transaction;
+import example.transactions.store.TransactionStore;
+import example.transactions.enums.Type;
+import example.transactions.model.Transaction;
 import java.util.UUID;
 import java.time.Instant;
 import java.util.List;
