@@ -2,7 +2,7 @@
 
 ## Overview
 This project implements a lightweight HTTP server in Java to manage financial transactions.  
-It demonstrates a full CRUD backend with separation of concerns across Controller > Service > Store layers, implemented without frameworks to showcase core Java backend skills.
+It demonstrates a full CRUD backend with separation of concerns across Controller → Service → Store layers, implemented without frameworks to showcase core Java backend skills.
 
 Key features:
 - Create, read, update, and delete transactions
@@ -116,7 +116,7 @@ DELETE /transactions/{id}
 * **Controller** handles HTTP parsing, request routing, and response formatting
 * **Service** enforces business rules and validation
 * **Store** manages in-memory transaction data, no HTTP logic
-* **Routing logic**: `/transactions` > collection, `/transactions/{id}` > individual transaction
+* **Routing logic**: `/transactions` → collection, `/transactions/{id}` → individual transaction
 * **Update sentinel**: `0.0` is used as a “not provided” signal for `amount` in `PUT` requests (see Update behavior above)
 * All endpoints tested with `curl` to verify behavior
 
