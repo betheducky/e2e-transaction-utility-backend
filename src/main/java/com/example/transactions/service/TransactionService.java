@@ -42,6 +42,16 @@ public class TransactionService {
         return store.findAll();
     }
 
+    public Transaction getById(String id) {
+        Transaction item = store.findById(id);
+
+        if(item == null) {
+            throw new IllegalArgumentException("Item not found!");
+        }
+
+        return item;
+    }
+
     public Transaction update(String id, String updatedDescription, double updatedAmount, Type updatedType) {
 
         Transaction existing = store.findById(id);
@@ -54,19 +64,20 @@ public class TransactionService {
             existing.setDescription(updatedDescription);
         }
 
-        if (updatedAmount < 0) {
-            throw new IllegalArgumentException("Amount must be non-negative!");
-        }
-
         Type effectiveType = updatedType != null
             ? updatedType
             : existing.getType();
 
         if(effectiveType == null) throw new IllegalStateException("Transaction type must be defined!");
 
+        if (updatedAmount < 0) {
+            // Math logic handled using absolute value of integers
+            throw new IllegalArgumentException("Amount must be non-negative!");
+        }
+            // Later refactor with double Balance
         double newBalance = effectiveType.apply(existing.getAmount(), updatedAmount);
-
-        existing.setAmount(newBalance);
+            // Any non-positive & non-negative value replaced with existing amount
+        existing.setAmount(updatedAmount > 0 ? newBalance : existing.getAmount());
         existing.setUpdatedAt(Instant.now());
 
         return existing;

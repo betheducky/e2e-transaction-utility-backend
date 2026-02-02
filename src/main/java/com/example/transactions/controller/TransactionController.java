@@ -34,11 +34,17 @@ public class TransactionController implements HttpHandler {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
 
+        System.out.println("METHOD: " + method);
+        System.out.println("PATH: " + path);
+        System.out.println("RAW URI: " + exchange.getRequestURI());
+
         try {
             if(method.equals("POST") && path.equals("/transactions")) {
                 handleCreate(exchange);
             } else if (method.equals("GET") && path.equals("/transactions")) {
                 handleGetAll(exchange);
+            } else if(method.equals("GET") && path.startsWith("/transactions/")){
+                handleGetById(exchange);
             } else if (method.equals("PUT") && path.startsWith("/transactions/")) {
                 handleUpdate(exchange);
             } else if (method.equals("DELETE") && path.startsWith("/transactions/")) {
@@ -72,6 +78,15 @@ public class TransactionController implements HttpHandler {
         sendResponse(exchange, 200, JsonUtil.stringify(transactions));
     }
 
+    private void handleGetById(HttpExchange exchange) throws IOException {
+        String path = exchange.getRequestURI().getPath();
+        String id = path.substring(path.lastIndexOf("/") + 1);
+
+        Transaction item = service.getById(id);
+
+        sendResponse(exchange, 201, JsonUtil.stringify(item));
+    }
+
     private void handleUpdate(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         String id = path.substring(path.lastIndexOf("/") + 1);
@@ -82,7 +97,8 @@ public class TransactionController implements HttpHandler {
         String desc = (String) data.get("description");
         double amount = data.get("amount") != null
             ? Double.parseDouble(data.get("amount"))
-            : null;
+            // Zero used as null value
+            : 0;
         
         Type type = data.get("type") != null
             ? Type.valueOf((String) data.get("type"))
@@ -99,6 +115,6 @@ public class TransactionController implements HttpHandler {
 
         service.delete(id);
 
-        sendResponse(exchange, 204, "");
+        exchange.sendResponseHeaders(204, -1);
     }
 }
