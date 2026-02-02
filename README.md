@@ -128,6 +128,8 @@ DELETE /transactions/{id}
 
 ```bash
 javac -d out $(find src/main/java -name "*.java")
+# Compiles all Java source files recursively into the "out" directory.
+# $(find ...) does not work on Windows OS; compile files manually or with an IDE.
 ```
 
 2. Run the server:
