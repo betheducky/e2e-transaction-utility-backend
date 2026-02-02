@@ -4,14 +4,18 @@ public enum Type {
     INCOME {
         @Override
         public double apply(double current, double amount) {
-            return current + amount;
+            // double Balance variable for later implementation with current
+            // return current + amount;
+            return amount;
         }
     },
 
     EXPENSE {
         @Override 
         public double apply(double current, double amount) {
-            return current - amount;
+            // double Balance variable for later implementation with current
+            // return current - amount;
+            return amount;
         }
     };
 
