@@ -20,7 +20,7 @@ public class TransactionService {
             throw new IllegalArgumentException("Description cannot be blank!");
         }
 
-        if(amount == 0) {
+        if(amount == 0 || amount < 0) {
             throw new IllegalArgumentException("Amount must be greater than zero!");
         }
 

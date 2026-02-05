@@ -138,9 +138,47 @@ javac -d out $(find src/main/java -name "*.java")
 java -cp out example.transactions.Main
 ```
 
-3. Test endpoints with `curl` or Postman.
+3. Manually test endpoints with `curl` or Postman.
 
 ---
+
+## Running Unit Tests
+
+This project includes unit tests for the service layer using JUnit 5.
+
+### 1. Download the JUnit Platform Console Standalone JAR and place it in a `lib/` folder:
+
+```bash
+mkdir -p lib
+cd lib
+curl -LO https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.0/junit-platform-console-standalone-1.10.0.jar
+cd ..
+```
+
+### 2. Compile the source and tests.
+
+```bash
+javac -cp lib/junit-platform-console-standalone-1.10.0.jar -d out \
+  src/main/java/**/*.java \
+  tests/java/**/*.java
+```
+
+### 3. Run the tests.
+
+```bash
+java -jar lib/junit-platform-console-standalone-1.10.0.jar execute \
+  --class-path out \
+  --scan-class-path
+```
+
+## Current Test Coverage
+
+Tests verify the core business logic in TransactionService:
+
+* Creating transactions
+* Validation of negative amounts
+* Partial update behavior (preserving of existing values)
+
 
 ## Future Implementations
 
