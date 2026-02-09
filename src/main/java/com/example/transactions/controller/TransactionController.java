@@ -21,6 +21,8 @@ public class TransactionController implements HttpHandler {
     }
 
     private void sendResponse(HttpExchange exchange, int statusCode, String responseBody) throws IOException {
+        addCorsHeaders(exchange);
+
         byte[] responseBytes = responseBody.getBytes(StandardCharsets.UTF_8);
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(statusCode, responseBytes.length);
@@ -30,24 +32,39 @@ public class TransactionController implements HttpHandler {
         }
     }
 
-    public void handle(HttpExchange exchange) throws IOException {
-        String method = exchange.getRequestMethod();
-        String path = exchange.getRequestURI().getPath();
+    private void addCorsHeaders(HttpExchange exchange) {
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "http://localhost:4200");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "*");
+    }
 
-        System.out.println("METHOD: " + method);
-        System.out.println("PATH: " + path);
-        System.out.println("RAW URI: " + exchange.getRequestURI());
+    public void handle(HttpExchange exchange) throws IOException {
 
         try {
-            if(method.equals("POST") && path.equals("/transactions")) {
+
+            addCorsHeaders(exchange);
+        
+            String method = exchange.getRequestMethod();
+            String path = exchange.getRequestURI().getPath();
+
+            System.out.println("METHOD: " + method);
+            System.out.println("PATH: " + path);
+            System.out.println("RAW URI: " + exchange.getRequestURI());
+
+            if(method.equals("OPTIONS")) {
+                exchange.sendResponseHeaders(204, -1);
+                return;
+            }
+
+            if(method.equals("POST") && path.equals("/api/transactions")) {
                 handleCreate(exchange);
-            } else if (method.equals("GET") && path.equals("/transactions")) {
+            } else if (method.equals("GET") && path.equals("/api/transactions")) {
                 handleGetAll(exchange);
-            } else if(method.equals("GET") && path.startsWith("/transactions/")){
+            } else if(method.equals("GET") && path.startsWith("/api/transactions/")){
                 handleGetById(exchange);
-            } else if (method.equals("PUT") && path.startsWith("/transactions/")) {
+            } else if (method.equals("PUT") && path.startsWith("/api/transactions/")) {
                 handleUpdate(exchange);
-            } else if (method.equals("DELETE") && path.startsWith("/transactions/")) {
+            } else if (method.equals("DELETE") && path.startsWith("/api/transactions/")) {
                 handleDelete(exchange);
             } else {
                 sendResponse(exchange, 404, "Not Found");
@@ -115,6 +132,7 @@ public class TransactionController implements HttpHandler {
 
         service.delete(id);
 
+        addCorsHeaders(exchange);
         exchange.sendResponseHeaders(204, -1);
     }
 }
