@@ -146,7 +146,7 @@ javac -d out $(find src/main/java -name "*.java")
 java -cp out example.transactions.Main
 ```
 
-4. (Optional) Manually test endpoints with `curl` or Postman. Clone and test with frontend project [here.](https://github.com/betheducky/e2e-transaction-utility-frontend/blob/main/README.md#local-setup)
+4. (Optional) Manually test endpoints with `curl` or Postman. Clone and test project frontend [here.](https://github.com/betheducky/e2e-transaction-utility-frontend/blob/main/README.md#local-setup)
 
 ---
 
