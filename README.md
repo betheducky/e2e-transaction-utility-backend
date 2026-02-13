@@ -122,9 +122,17 @@ DELETE /transactions/{id}
 
 ---
 
-## Running the Server
+## Local Setup
 
-1. Compile the project:
+1. Clone the repository
+   
+```bash
+git clone https://github.com/betheducky/e2e-transaction-utility-backend.git
+cd e2e-transaction-utility-backend
+```
+
+
+2. Compile the project:
 
 ```bash
 javac -d out $(find src/main/java -name "*.java")
@@ -132,13 +140,13 @@ javac -d out $(find src/main/java -name "*.java")
 # $(find ...) does not work on Windows OS; compile files manually or with an IDE.
 ```
 
-2. Run the server:
+3. Run the server:
 
 ```bash
 java -cp out example.transactions.Main
 ```
 
-3. Manually test endpoints with `curl` or Postman.
+4. (Optional) Manually test endpoints with `curl` or Postman.
 
 ---
 
